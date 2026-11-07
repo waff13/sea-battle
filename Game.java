@@ -7,6 +7,7 @@ public class Game {
     private final int NUMBER_OF_PLAYERS = 2;
 
     Player[] players = new Player[NUMBER_OF_PLAYERS];
+    Board[] boards = new Board[NUMBER_OF_PLAYERS];
 
     private Player initializePlayer (int number) {
         Scanner scanner = new Scanner(System.in);
@@ -15,39 +16,48 @@ public class Game {
             System.out.println("Is player " + humanReadableNumber + " human? (Y/N): ");
             String playerType = scanner.nextLine().trim();
             if (playerType.equalsIgnoreCase("y")) {
-                return new HumanPlayer("Player " + humanReadableNumber + " (human)");
+                Player humanPlayer = new HumanPlayer();
+                humanPlayer.setName("Player " + humanReadableNumber + " (human)");
+                humanPlayer.setIsHuman(true);
+                return humanPlayer;
             } else if (playerType.equalsIgnoreCase("n")) {
-                return new ComputerPlayer("Player " + humanReadableNumber + " (computer)");
+                Player computerPlayer = new ComputerPlayer();
+                computerPlayer.setName("Player " + humanReadableNumber + " (computer)");
+                computerPlayer.setIsHuman(false);
+                return computerPlayer;
             } else {
                 System.out.println("Please answer only Y or N");
             }
         }
     }
 
-    private void run() {
-        /*System.out.println("Welcome to the Sea Battle game!");
-        Scanner scanner = new Scanner(System.in);
-        for (int i = 1; i <= NUMBER_OF_PLAYERS; i++) {
-            System.out.println("Is player " + i + " human? (Y/N)");
-            String playerType = scanner.nextLine();
+    private Board initializeBoard (int number) {
+        //TODO
+        return new Board();
+    }
 
-            if (playerType.equalsIgnoreCase("y")) {
-                HumanPlayer playerX = new HumanPlayer();
-                System.out.println(" > human");
-                playerX.setName("Player " + i);
-            } else if (playerType.equalsIgnoreCase("n")) {
-                ComputerPlayer playerY = new ComputerPlayer();
-                System.out.println(" > computer");
-                playerY.setName("Player " + i + " (computer)");
-            }
-        }*/
-
-        System.out.println("Welcome to the Sea Battle game!");
+    private void setupPlayers() {
         for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
             players[i] = initializePlayer(i);
         }
+        //System.out.println(" > it is " + players[0].getName() + " vs. " + players[1].getName());
+        System.out.println(" > Player 1 is " + (players[0].isHuman() ? "human" : "computer" )
+                + " and Player 2 is " + (players[1].isHuman() ? "human" : "computer"));
+    }
 
-        System.out.println(" > it is " + players[0].getName() + " vs. " + players[1].getName());
+    private void setupBoard() {
+        // copycat of setupPlayers(), could be refactored later
+        for (int i = 0; i < NUMBER_OF_PLAYERS; i++) {
+            boards[i] = initializeBoard(i);
+        }
+        System.out.println(" > board is set up");
+    }
+
+    private void run() {
+        System.out.println("Welcome to the Sea Battle game!");
+
+        setupPlayers();
+        setupBoard();
     }
 
     public static void main(String[] args) {
