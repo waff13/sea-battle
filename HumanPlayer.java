@@ -1,41 +1,23 @@
 package SeaBattle_new;
 
+import java.util.Scanner;
+
 public class HumanPlayer implements Player {
 
-    private String name;
-    private Boolean isHuman;
+    private final String name;
+    private final Scanner scanner;
+    private final Board board;
 
     // reads "B7" from Scanner, validates, re-asks on bad input
 
-    /*public HumanPlayer (String name) {
+    public HumanPlayer (String name, Scanner scanner) {
         this.name = name;
-    }*/
+        this.scanner = scanner;
+        this.board = new Board();
+    }
 
     @Override
     public String getName() {
         return name;
-    }
-
-    @Override
-    public Boolean isHuman() {
-        return Boolean.TRUE.equals(isHuman);
-    }
-
-    @Override
-    public void setIsHuman(Boolean value) {
-        this.isHuman = value;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private Board setupBoard() {
-
-        Board humanBoard = new Board();
-        humanBoard.setName("HumanBoard");
-
-        return humanBoard;
     }
 }
