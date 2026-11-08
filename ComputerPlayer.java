@@ -16,4 +16,9 @@ public class ComputerPlayer implements Player {
     public String getName() {
         return name;
     }
+
+    @Override
+    public Board getBoard() {
+        return board;
+    }
 }
